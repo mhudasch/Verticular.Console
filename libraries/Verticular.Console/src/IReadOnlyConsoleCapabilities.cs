@@ -8,7 +8,7 @@ namespace Verticular.Console
     /// <summary>
     /// Gets or sets the color system.
     /// </summary>
-    ColorSystem ColorSystem { get; }
+    ConsoleColorSystem ColorSystem { get; }
 
     /// <summary>
     /// Gets or sets a value indicating whether or not

@@ -19,8 +19,8 @@
     <VersionPrefix Condition=" '$(VersionPrefix)' == '' ">1.0.0</VersionPrefix>
     <VersionSuffix Condition=" '$(VersionSuffix)' == '' "></VersionSuffix>
 
-    <!-- TODO: Fix this -->
-    <RepositoryUrl>https://github.com/mhudasch/Verticular.Console</RepositoryUrl>
+    <RepositoryUrl>https://github.com/mhudasch/Verticular.Console.git</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/mhudasch/Verticular.Console</PackageProjectUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">

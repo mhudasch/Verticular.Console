@@ -10,13 +10,13 @@ namespace Verticular.Console
     private const string TrueColorTerminal = "truecolor";
     private const string TwentyFourBitTerminal = "24Bit";
 
-    public static ColorSystem Detect(bool supportsAnsi)
+    public static ConsoleColorSystem Detect(bool supportsAnsi)
     {
       // No colors?
       if (PlatformHelpers.InEnvironment(NoColorEnvironmentVariable1)
         || PlatformHelpers.InEnvironment(NoColorEnvironmentVariable2))
       {
-        return ColorSystem.NoColors;
+        return ConsoleColorSystem.NoColors;
       }
 
       // Windows?
@@ -27,7 +27,7 @@ namespace Verticular.Console
           // Figure out what we should do here.
           // Does really all Windows terminals support
           // eight-bit colors? Probably not...
-          return ColorSystem.EightBit;
+          return ConsoleColorSystem.EightBit;
         }
 
         // Windows 10.0.15063 and above support true color,
@@ -37,11 +37,11 @@ namespace Verticular.Console
         {
           if (major == 10 && build >= 15063)
           {
-            return ColorSystem.TrueColor;
+            return ConsoleColorSystem.TrueColor;
           }
           else if (major > 10)
           {
-            return ColorSystem.TrueColor;
+            return ConsoleColorSystem.TrueColor;
           }
         }
       }
@@ -53,13 +53,13 @@ namespace Verticular.Console
           if (colorTerm.Equals(TrueColorTerminal, StringComparison.OrdinalIgnoreCase)
             || colorTerm.Equals(TwentyFourBitTerminal, StringComparison.OrdinalIgnoreCase))
           {
-            return ColorSystem.TrueColor;
+            return ConsoleColorSystem.TrueColor;
           }
         }
       }
 
       // Should we default to eight-bit colors?
-      return ColorSystem.EightBit;
+      return ConsoleColorSystem.EightBit;
     }
   }
 }

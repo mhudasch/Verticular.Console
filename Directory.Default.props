@@ -114,10 +114,8 @@
 
   <!-- Default Item Groups -->
   <ItemGroup Condition="'$(NuGetPackage)' == 'true'">
-    <PackageReference Include="Microsoft.SourceLink.AzureRepos.Git" Version="1.1.1">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
+    <PackageReference Include="Microsoft.Net.Compilers.Toolset" Version="4.7.0" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="all" />
   </ItemGroup>
 
   <!--############### FEATURE DETECTION AREA ###############-->

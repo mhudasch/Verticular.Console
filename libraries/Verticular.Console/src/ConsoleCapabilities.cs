@@ -11,7 +11,7 @@ namespace Verticular.Console
   public sealed class ConsoleOutputCapabilities : IReadOnlyConsoleOutputCapabilities
   {
     /// <inheritdoc />
-    public ColorSystem ColorSystem { get; set; }
+    public ConsoleColorSystem ColorSystem { get; set; }
 
     /// <inheritdoc />
     public bool SupportsAnsiSequences { get; set; }

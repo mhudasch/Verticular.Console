@@ -1,9 +1,9 @@
-﻿namespace Verticular.Console
+namespace Verticular.Console
 {
   /// <summary>
   /// Represents a color system.
   /// </summary>
-  public enum ColorSystem
+  public enum ConsoleColorSystem
   {
     /// <summary>
     /// No colors.
