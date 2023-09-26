@@ -1,0 +1,55 @@
+# Set default behaviour to automatically normalize line endings.
+*                   text=auto
+
+# Force batch scripts to always use CRLF line endings so that if a repo is accessed
+# in Windows via a file share from Linux, the scripts will work.
+*.{cmd,[cC][mM][dD]} text eol=crlf
+*.{bat,[bB][aA][tT]} text eol=crlf
+
+# Force bash scripts to always use LF line endings so that if a repo is accessed
+# in Unix via a file share from Windows, the scripts will work.
+*.sh                text eol=lf
+
+##
+## 'binary' is a macro attribute for: -diff -merge -text
+## this means git skips the the automatic detection of attributes for these
+## files. Instead it uses the binary differ to generate diffs which speeds
+## things up.
+##
+
+# Archives
+*.7z                binary
+*.br                binary
+*.gz                binary
+*.tar               binary
+*.zip               binary
+
+# Documents
+*.pdf               binary
+*.{doc,docx}        binary
+*.{ppt,pptx}        binary
+*.{xls,xlsx}        binary
+
+# Images
+*.bmp               binary
+*.gif               binary
+*.ico               binary
+*.jpeg              binary
+*.jpg               binary
+*.png               binary
+*.psd               binary
+*.webp              binary
+
+# Fonts
+*.ttf               binary
+*.woff              binary
+*.woff2             binary
+*.otf               binary
+*.eot               binary
+
+# Misc
+*.dll               binary
+*.exe               binary
+*.msu               binary
+*.npkg              binary
+*.snupkg            binary

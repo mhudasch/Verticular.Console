@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>library</OutputType>
+    <TargetFramework></TargetFramework>
+    <TargetFrameworks>$(FullTargetFrameworks);$(StandardTargetFrameworks);$(CoreTargetFrameworks)</TargetFrameworks>
+    <RootNamespace>Verticular.Console</RootNamespace>
+    <ProjectGuid>{03917DEF-5882-4A85-9F11-CC143CC74C73}</ProjectGuid>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <VersionPrefix>6.0.0</VersionPrefix>
+    <VersionSuffix Condition=" '$(VersionSuffix)' == '' "></VersionSuffix>
+    <Configurations>$(Configurations);CI</Configurations>
+    <NuGetPackage>true</NuGetPackage>
+    <IsPackable>true</IsPackable>
+    <IsPublishable>false</IsPublishable>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <SourceRoot Include="$(MSBuildThisFileDirectory)/" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Condition="'$(IsNetFrameworkTarget)' == 'true'" Include="System.ValueTuple" Version="4.5.0" />
+  </ItemGroup>
+
+  <!--<ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.7.0" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.4" PrivateAssets="all" />
+  </ItemGroup>-->
+
+</Project>

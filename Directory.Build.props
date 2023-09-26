@@ -1,0 +1,29 @@
+<Project>
+  <!-- Please do not remove the following line. Put custom settings below this import. -->
+  <Import Project="$([MSBuild]::GetPathOfFileAbove(Directory.Default.props))" />
+
+  <PropertyGroup Condition="$(IsTestProject)">
+    <TargetFramework Condition="'$(TargetFramework)' == ''">net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="!$(IsTestProject) AND '$(NuGetPackage)' == 'false'">
+    <TargetFramework Condition="'$(TargetFramework)' == ''">net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="!$(IsTestProject)">
+    <!-- This is an Executable -->
+    <IsPackable>false</IsPackable>
+    <IsPublishable>true</IsPublishable>
+
+    <!-- Properties for the definition of package/file/assembly version -->
+    <VersionPrefix Condition=" '$(VersionPrefix)' == '' ">1.0.0</VersionPrefix>
+    <VersionSuffix Condition=" '$(VersionSuffix)' == '' "></VersionSuffix>
+
+    <!-- TODO: Fix this -->
+    <RepositoryUrl>https://github.com/mhudasch/Verticular.Console</RepositoryUrl>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <NoWarn>$(NoWarn);CA1848;CA2254</NoWarn>
+  </PropertyGroup>
+</Project>

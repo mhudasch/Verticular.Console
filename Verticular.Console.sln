@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34031.279
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_sln", "_sln", "{A413070E-4B34-49F8-A70D-2B013DF88A4E}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		global.json = global.json
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{6A5089ED-29CF-4A04-8D39-510FEB1202F5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Verticular.Console", "libraries\Verticular.Console\src\Verticular.Console.csproj", "{03917DEF-5882-4A85-9F11-CC143CC74C73}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		CI|Any CPU = CI|Any CPU
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{03917DEF-5882-4A85-9F11-CC143CC74C73}.CI|Any CPU.ActiveCfg = CI|Any CPU
+		{03917DEF-5882-4A85-9F11-CC143CC74C73}.CI|Any CPU.Build.0 = CI|Any CPU
+		{03917DEF-5882-4A85-9F11-CC143CC74C73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03917DEF-5882-4A85-9F11-CC143CC74C73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03917DEF-5882-4A85-9F11-CC143CC74C73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03917DEF-5882-4A85-9F11-CC143CC74C73}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{03917DEF-5882-4A85-9F11-CC143CC74C73} = {6A5089ED-29CF-4A04-8D39-510FEB1202F5}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DE57B8F9-699F-4FD3-9BE9-44F7EAA0ED36}
+	EndGlobalSection
+EndGlobal

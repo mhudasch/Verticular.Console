@@ -1,0 +1,137 @@
+<Project>
+  <PropertyGroup>
+    <!-- Global Default Values -->
+    <!--<RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+    <DisableImplicitNuGetFallbackFolder>true</DisableImplicitNuGetFallbackFolder>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>-->
+    <AppendTargetFrameworkToOutputPath>true</AppendTargetFrameworkToOutputPath>
+    <AppendRuntimeIdentifierToOutputPath>true</AppendRuntimeIdentifierToOutputPath>
+
+    <Nullable Condition="'$(Nullable)' == ''">enable</Nullable>
+    <LangVersion Condition="'$(LangVersion)' == ''">latest</LangVersion>
+    <TargetLatestRuntimePatch>true</TargetLatestRuntimePatch>
+
+    <SolutionDir Condition="'$(SolutionDir)' == ''">$(MSBuildThisFileDirectory)</SolutionDir>
+    <CurrentYear Condition="'$(CurrentYear)' == ''">$([System.DateTime]::Now.ToString(yyyy))</CurrentYear>
+    <TestProjectPattern Condition="'$(TestProjectPattern)' == ''">(?:Unit)?Tests$</TestProjectPattern>
+    <IsTestProject>$([System.Text.RegularExpressions.Regex]::IsMatch($(MSBuildProjectName), $(TestProjectPattern)))</IsTestProject>
+    <GenerateAssemblyInfo Condition="!$(IsTestProject)">true</GenerateAssemblyInfo>
+    <GenerateDocumentationFile Condition="!$(IsTestProject)">true</GenerateDocumentationFile>
+    <Deterministic Condition="!$(IsTestProject)">true</Deterministic>
+    <RepositoryType>git</RepositoryType>
+    <ImplicitUsings>enable</ImplicitUsings>
+
+    <!-- Package Default Values -->
+    <IsPackable>false</IsPackable>
+    <IsPublishable>false</IsPublishable>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <Authors>Martin Hudasch</Authors>
+    <Company></Company>
+    <Copyright>Copyright © 2016-$(CurrentYear) Martin Hudasch | All rights reserved</Copyright>
+    <MinClientVersion>2.12</MinClientVersion>
+
+    <!-- Target Framework Stuff -->
+    <IncludeFullFramework Condition="'$(IncludeFullFramework)' == ''">true</IncludeFullFramework>
+    <IncludeLatestFullFramework Condition="'$(IncludeLatestFullFramework)' == ''">true</IncludeLatestFullFramework>
+
+    <!--::: NET46 ::: FULL FRAMEWORK -->
+    <FullTargetFrameworks Condition="'$(IncludeFullFramework)' == 'true'">net461</FullTargetFrameworks>
+    <!--::: NET47 ::: FULL FRAMEWORK -->
+    <!--<FullTargetFrameworks Condition="'$(IncludeFullFramework)' == 'true'">$(FullTargetFrameworks);net47;net471;net472</FullTargetFrameworks>-->
+    <!--::: NET48 ::: FULL FRAMEWORK -->
+    <!--<FullTargetFrameworks Condition="'$(IncludeFullFramework)' == 'true' AND '$(IncludeLatestFullFramework)' == 'true'">$(FullTargetFrameworks);net48</FullTargetFrameworks>-->
+
+    <!--::: STD2.0 ::: STANDARD FRAMEWORK -->
+    <StandardTargetFrameworks>netstandard2.0</StandardTargetFrameworks>
+
+    <!--::: CORE ::: DOTNET CORE FRAMEWORK -->
+    <CoreTargetFrameworks>net6.0</CoreTargetFrameworks>
+
+    <NuGetPackage Condition="'$(NuGetPackage)' == ''">false</NuGetPackage>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="$([System.Text.RegularExpressions.Regex]::IsMatch($(TargetFramework), `^net(?:20|35|40|4[567][12]?|48)$`))">
+    <DefineConstants>$(DefineConstants);NETFULL;NET;NF</DefineConstants>
+    <IsNetStandardTarget>false</IsNetStandardTarget>
+    <IsNetFrameworkTarget>true</IsNetFrameworkTarget>
+    <IsNetCoreTarget>false</IsNetCoreTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition="$([System.Text.RegularExpressions.Regex]::IsMatch($(TargetFramework), `^netstandard(?:1\.[0-6]|2\.[0-1])$`))">
+    <DefineConstants>$(DefineConstants);NETSTANDARD;NS</DefineConstants>
+    <IsNetStandardTarget>true</IsNetStandardTarget>
+    <IsNetFrameworkTarget>false</IsNetFrameworkTarget>
+    <IsNetCoreTarget>false</IsNetCoreTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition="$([System.Text.RegularExpressions.Regex]::IsMatch($(TargetFramework), `^netcoreapp(?:1\.[01]|2\.[012]|3\.[0])$|net[56789]\.0`))">
+    <DefineConstants>$(DefineConstants);NETCOREAPP;NETCORE;NC</DefineConstants>
+    <IsNetStandardTarget>false</IsNetStandardTarget>
+    <IsNetFrameworkTarget>false</IsNetFrameworkTarget>
+    <IsNetCoreTarget>true</IsNetCoreTarget>
+  </PropertyGroup>
+
+  <!-- Ignore NU5105 ignore NuGet-Clients that do not support semver 2.0.0 -->
+  <!-- Ignore CA1303 that wants us to put all exception texts into resources -->
+  <PropertyGroup>
+    <NoWarn>$(NoWarn);NU5105;NU1701;NU1702;NU1705;AD1000;CA1303</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineConstants>$(DefineConstants);TRACE;DEBUG</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <Optimize>true</Optimize>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <DefineConstants>$(DefineConstants);TRACE</DefineConstants>
+    <!-- Ignore CS1591 missing comments on public apis -->
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
+    <MSBuildTreatWarningsAsErrors>true</MSBuildTreatWarningsAsErrors>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'CI|AnyCPU'">
+    <Optimize>true</Optimize>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>embedded</DebugType>
+    <DefineConstants>$(DefineConstants);TRACE</DefineConstants>
+    <NoWarn>$(NoWarn)</NoWarn>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningsAsErrors />
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+  </PropertyGroup>
+
+  <!-- Unit-Test Project Dependencies -->
+  <ItemGroup Condition="$(IsTestProject)">
+
+  </ItemGroup>
+
+  <!-- Not Unit-Test Project Dependencies -->
+  <ItemGroup Condition="!$(IsTestProject)">
+    <None Include="$(SolutionDir)/README.md" Pack="true" PackagePath="/"/>
+  </ItemGroup>
+
+  <!-- Default Item Groups -->
+  <ItemGroup Condition="'$(NuGetPackage)' == 'true'">
+    <PackageReference Include="Microsoft.SourceLink.AzureRepos.Git" Version="1.1.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <!--############### FEATURE DETECTION AREA ###############-->
+  <!-- Feature detect for System.Memory (Span<T> and so on) -->
+  <PropertyGroup>
+    <SupportsSpanOfT>false</SupportsSpanOfT>
+    <SupportsValueTuple>false</SupportsValueTuple>
+  </PropertyGroup>
+  <PropertyGroup Condition="$([System.Text.RegularExpressions.Regex]::IsMatch($(TargetFramework), `^netcoreapp(?:2\.[12]|3\.[0])$|net[5678].0`))">
+    <SupportsSpanOfT>true</SupportsSpanOfT>
+    <DefineConstants>$(DefineConstants);FEATURE_SPAN_OF_T</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="$([System.Text.RegularExpressions.Regex]::IsMatch($(TargetFramework), `^netcoreapp(?:2\.[12]|3\.[0])$|net[5678].0`))">
+    <SupportsSpanOfT>true</SupportsSpanOfT>
+    <DefineConstants>$(DefineConstants);FEATURE_VALUE_TUPLE</DefineConstants>
+  </PropertyGroup>
+</Project>
